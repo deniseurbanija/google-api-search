@@ -12,7 +12,7 @@
 
 ### 1. Configuración Inicial
 
-- Instalar dependencias con este comando
+- Instalar dependencias 
 - Necesitamos una "llave mágica" (API Key) de Google
 - Esta llave va en un archivo especial llamado `.env`:
 
