@@ -1,36 +1,74 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🗺️ Implementación de Google Places API
 
-## Getting Started
+## 📝 ¿Qué hace esta implementación?
 
-First, run the development server:
+1. Permite buscar direcciones mientras escribes
+2. Muestra sugerencias de direcciones reales
+3. Autocompleta los campos del formulario
+4. Valida que las direcciones sean reales
+5. Restringe la búsqueda por país (en este caso, Argentina)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 🔍 ¿Cómo funciona?
+
+### 1. Configuración Inicial
+
+- Instalar dependencias con este comando
+- Necesitamos una "llave mágica" (API Key) de Google
+- Esta llave va en un archivo especial llamado `.env`:
+
+```env
+NEXT_PUBLIC_GOOGLE_MAPS_API_KEY=tu_api_key_aquí
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Carga del Mapa (google-maps.ts)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```typescript
+// Cuando alguien usa la app por primera vez:
+1. Verificamos si Google Maps ya está cargado
+2. Si no está cargado, añadimos un "script" a la página
+3. Este script descarga todo lo necesario de Google Maps
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 3. Búsqueda de Direcciones (use-google-places-autocomplete.tsx)
 
-## Learn More
+- Cuando escribes en el campo de dirección:
+  1. Esperamos a que escribas al menos 3 letras
+  2. Hacemos una pausa de 300ms para no sobrecargar a Google
+  3. Enviamos lo que escribiste a Google
+  4. Google nos devuelve sugerencias de direcciones reales
 
-To learn more about Next.js, take a look at the following resources:
+### 4. Componente de Búsqueda (address-search.tsx)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Es como un formulario inteligente que:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Tiene un menú desplegable para elegir el país
+- Muestra un campo para escribir la dirección
+- Muestra las sugerencias de Google en una lista
+- Marca con un ✓ la dirección que seleccionaste
+- Tiene un botón para escribir la dirección manualmente
 
-## Deploy on Vercel
+## 🎯 Ejemplo de Uso
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+1. El usuario selecciona un país (por ejemplo, "Argentina")
+2. Empieza a escribir una dirección ("Av. Corrie...")
+3. Google sugiere direcciones reales:
+   - Av. Corrientes 1234, Buenos Aires
+   - Av. Corrientes 5678, Buenos Aires
+4. El usuario selecciona una dirección
+5. ¡Listo! La dirección queda guardada y validada
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## 🚀 Ventajas de Usar Google Places
+
+1. **Direcciones Reales**:
+
+   - Todas las direcciones existen de verdad
+   - Menos errores en los envíos
+
+2. **Formato Correcto**:
+
+   - Las direcciones tienen un formato estándar
+   - Más fácil para procesar y enviar
+
+3. **Actualizado**:
+   - Google actualiza sus datos constantemente
+   - Siempre tenemos las direcciones más recientes
