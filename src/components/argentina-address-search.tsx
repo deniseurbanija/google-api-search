@@ -29,7 +29,7 @@ export function ArgentinaAddressSearch({
   const [selectedAddress, setSelectedAddress] = useState<string | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // Usar el hook existente con el código de país AR
+  // Use hook with 'AR' code for Argentina
   const { predictions, fetchPredictions, clearPredictions, loading } =
     useGooglePlacesAutocomplete("AR");
 
@@ -48,12 +48,11 @@ export function ArgentinaAddressSearch({
   const parseArgentinaAddress = (
     prediction: google.maps.places.AutocompletePrediction
   ) => {
-    // Dividir la dirección en sus componentes
+    // Split the address into its components
     const addressParts = prediction.description
       .split(",")
       .map((part) => part.trim());
 
-    // En Argentina, el formato típico es: "Calle 123, Barrio, Ciudad, Provincia"
     const components = {
       street: addressParts[0]?.split(" ").slice(0, -1).join(" "), // Todo menos el último número
       streetNumber: addressParts[0]?.split(" ").pop(), // El último número
