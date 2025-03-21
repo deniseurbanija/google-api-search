@@ -4,9 +4,8 @@
 
 1. Permite buscar direcciones mientras escribes
 2. Muestra sugerencias de direcciones reales
-3. Autocompleta los campos del formulario
-4. Valida que las direcciones sean reales
-5. Restringe la búsqueda por país (en este caso, Argentina)
+3. Valida que las direcciones sean reales
+4. Restringe la búsqueda por país (en este caso, Argentina)
 
 ## 🔍 ¿Cómo funciona?
 
